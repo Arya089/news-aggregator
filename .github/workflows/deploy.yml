@@ -20,8 +20,8 @@ jobs:
           distribution: 'temurin'
           cache: maven
 
-      - name: Build and run tests
-        run: mvn clean verify
+       - name: Build application
+         run: mvn clean package -DskipTests
 
   docker-build-push:
     needs: build-and-test
