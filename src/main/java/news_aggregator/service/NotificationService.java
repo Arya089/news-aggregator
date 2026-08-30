@@ -26,19 +26,16 @@ public class NotificationService {
         User user = userService.getUserByUsername(username);
         Notification notification = notificationRepository.findById(notificationId)
                 .orElseThrow(() -> new RuntimeException("Notification not found"));
-
         if (!notification.getUserId().equals(user.getId())) {
             throw new RuntimeException("This notification does not belong to you");
         }
-
         notification.setRead(true);
         notificationRepository.save(notification);
     }
 
     public void markAllAsRead(String username) {
         User user = userService.getUserByUsername(username);
-        List<Notification> unread = notificationRepository.findByUserIdAndIsReadFalse(user.getId());
-
+        List<Notification> unread = notificationRepository.findByUserIdAndReadFalse(user.getId());
         for (Notification n : unread) {
             n.setRead(true);
         }

@@ -3,11 +3,9 @@ name: News Aggregator CI/CD
 on:
   push:
     branches: [ main ]
-  pull_request:
-    branches: [ main ]
 
 jobs:
-  build-and-test:
+  build:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
@@ -17,24 +15,22 @@ jobs:
         with:
           java-version: '17'
           distribution: 'temurin'
+          cache: maven
 
-      - name: Cache Maven
-        uses: actions/cache@v3
-        with:
-          path: ~/.m2
-          key: ${{ runner.os }}-m2
+      - name: Make mvnw executable
+        run: chmod +x mvnw
 
       - name: Build with Maven
-        run: mvn clean package -DskipTests
+        run: ./mvnw clean package -DskipTests
         env:
-          SPRING_DATASOURCE_URL: jdbc:postgresql://localhost:5432/newsdb
-          SPRING_DATASOURCE_USERNAME: postgres
-          SPRING_DATASOURCE_PASSWORD: postgres
+          SPRING_AUTOCONFIGURE_EXCLUDE: >
+            org.springframework.boot.autoconfigure.data.redis.RedisAutoConfiguration,
+            org.springframework.boot.autoconfigure.kafka.KafkaAutoConfiguration,
+            org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration
 
-  docker-build-push:
-    needs: build-and-test
+  docker-push:
+    needs: build
     runs-on: ubuntu-latest
-    if: github.ref == 'refs/heads/main'
     steps:
       - uses: actions/checkout@v3
 
