@@ -4,6 +4,9 @@ import Navbar from '../components/Navbar';
 
 const CATEGORIES = ['technology', 'sports', 'business', 'health', 'entertainment', 'world', 'india'];
 
+// Turn this on once Dev 1 adds PUT /api/users/preferences
+const PREFERENCES_ENABLED = false;
+
 const Profile = () => {
   const [profile, setProfile] = useState<any>(null);
   const [selected, setSelected] = useState<string[]>([]);
@@ -57,29 +60,33 @@ const Profile = () => {
           </div>
         )}
 
-        <h2 className="mt-8 mb-3 font-serif text-xl font-black text-black dark:text-white">
-          Favourite categories
-        </h2>
-        <div className="flex flex-wrap gap-2">
-          {CATEGORIES.map((cat) => (
-            <button
-              key={cat}
-              onClick={() => toggle(cat)}
-              className={`px-4 py-1.5 rounded-full text-sm font-medium capitalize transition ${
-                selected.includes(cat)
-                  ? 'bg-primary text-white'
-                  : 'bg-white dark:bg-gray-800 text-gray-700 dark:text-gray-300 border border-gray-300 dark:border-gray-600'
-              }`}
-            >
-              {cat}
-            </button>
-          ))}
-        </div>
+        {PREFERENCES_ENABLED && (
+          <>
+            <h2 className="mt-8 mb-3 font-serif text-xl font-black text-black dark:text-white">
+              Favourite categories
+            </h2>
+            <div className="flex flex-wrap gap-2">
+              {CATEGORIES.map((cat) => (
+                <button
+                  key={cat}
+                  onClick={() => toggle(cat)}
+                  className={`px-4 py-1.5 rounded-full text-sm font-medium capitalize transition ${
+                    selected.includes(cat)
+                      ? 'bg-primary text-white'
+                      : 'bg-white dark:bg-gray-800 text-gray-700 dark:text-gray-300 border border-gray-300 dark:border-gray-600'
+                  }`}
+                >
+                  {cat}
+                </button>
+              ))}
+            </div>
 
-        <button onClick={save} className="mt-6 px-6 py-2 bg-primary text-white rounded">
-          Save preferences
-        </button>
-        {msg && <p className="mt-3 text-sm text-gray-600 dark:text-gray-300">{msg}</p>}
+            <button onClick={save} className="mt-6 px-6 py-2 bg-primary text-white rounded">
+              Save preferences
+            </button>
+            {msg && <p className="mt-3 text-sm text-gray-600 dark:text-gray-300">{msg}</p>}
+          </>
+        )}
       </main>
     </div>
   );
