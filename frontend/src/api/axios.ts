@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 const API = axios.create({
-  baseURL: process.env.REACT_APP_API_URL || '',
+  baseURL: process.env.REACT_APP_API_URL || 'https://disarm-underrate-legal.ngrok-free.dev',
   headers: { 'ngrok-skip-browser-warning': 'true' },
 });
 
