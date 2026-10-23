@@ -1,5 +1,4 @@
-# news-aggregator
-# News Aggregator: Backend
+﻿# News Aggregator: Backend
 
 [![CI/CD](https://github.com/Arya089/news-aggregator/actions/workflows/deploy.yml/badge.svg)](https://github.com/Arya089/news-aggregator/actions/workflows/deploy.yml)
 
@@ -180,14 +179,14 @@ User profile and preferences, notifications, sources and admin (`/api/admin/**`,
 
 ```
 src/main/java/news_aggregator/
-├── config/        Security (JWT filter, CORS), Redis, Kafka producer configuration
-├── controller/    REST controllers
-├── service/       Business logic (articles, interactions, notifications)
-├── repository/    Spring Data JPA repositories
-├── model/         JPA entities (User, Article, ArticleInteraction, Notification, Source)
-├── security/      JWT utilities and the authentication filter
-├── Kafka/         Producer service and the three pipeline consumers
-└── fetch/         NewsAPI client, RSS parser and the scheduled fetch jobs
+â”œâ”€â”€ config/        Security (JWT filter, CORS), Redis, Kafka producer configuration
+â”œâ”€â”€ controller/    REST controllers
+â”œâ”€â”€ service/       Business logic (articles, interactions, notifications)
+â”œâ”€â”€ repository/    Spring Data JPA repositories
+â”œâ”€â”€ model/         JPA entities (User, Article, ArticleInteraction, Notification, Source)
+â”œâ”€â”€ security/      JWT utilities and the authentication filter
+â”œâ”€â”€ Kafka/         Producer service and the three pipeline consumers
+â””â”€â”€ fetch/         NewsAPI client, RSS parser and the scheduled fetch jobs
 ```
 
 ## Configuration
