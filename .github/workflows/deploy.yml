@@ -3,6 +3,14 @@ name: News Aggregator CI/CD
 on:
   push:
     branches: [ main ]
+    paths:
+      - 'src/**'
+      - 'pom.xml'
+      - 'mvnw'
+      - '.mvn/**'
+      - 'Dockerfile'
+      - '.github/workflows/deploy.yml'
+  workflow_dispatch:
 
 jobs:
   build:
