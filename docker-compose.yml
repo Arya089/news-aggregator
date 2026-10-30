@@ -17,6 +17,7 @@ services:
       - SPRING_REDIS_PORT=6379
       - SPRING_KAFKA_BOOTSTRAP_SERVERS=kafka:9092
       - NEWSAPI_KEY=${NEWSAPI_KEY}
+      - JWT_SECRET=${JWT_SECRET:?JWT_SECRET is required}
     depends_on:
       - postgres
       - redis
